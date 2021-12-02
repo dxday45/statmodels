@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1638402332738.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3982113816",
+    "id" : "38F50802",
+    "lastKnownWriteTime" : 1638443210,
+    "last_content_update" : 1638443211053,
+    "path" : "~/st-thomas-classes/statmodels/project_2/survival_asmt.R",
+    "project_path" : "project_2/survival_asmt.R",
+    "properties" : {
+        "cursorPosition" : "34,0",
+        "scrollLine" : "25",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

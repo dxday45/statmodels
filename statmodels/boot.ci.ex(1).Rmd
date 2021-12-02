@@ -1,0 +1,99 @@
+---
+title: "Bootstrap"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+For this we will be using the Evans County data.  Load the mosaic and dplyr packages and EvansCounty.csv into R, and then change the name to data
+
+```{r}
+library(mosaic)
+library(dplyr)
+data = EvansCounty
+```
+
+Confidence Interval for a mean
+Point Estimate
+```{r}
+mean.AGE <- mean(data$AGE)
+mean.AGE
+```
+
+standard CI calculation
+
+```{r}
+sd.AGE <- sd(data$AGE)
+sd.AGE
+```
+```{r}
+#Margin of Error
+Margin.of.Error <- 1.96*sd.AGE/sqrt(nrow(data))
+```
+```{r}
+#Lower and Upper Limits
+Lower <- mean.AGE - Margin.of.Error
+Upper <- mean.AGE + Margin.of.Error
+Lower
+Upper
+```
+
+Bootstrap CI
+Sample from AGE with replacement, and find the mean of the resampled values
+```{r}
+xxx <- resample(data$AGE)
+mean(xxx)
+```
+Let's repeat this process a large number of times and look at the distribution
+```{r}
+xxx <- do(1000)*mean(resample(data$AGE))
+hist(xxx$mean)
+```
+
+to find the upper and lower confidence limits, we find the 0.025 and 0.975 quantiles (for 95% CI)
+```{r}
+quantile(xxx$mean,probs=c(0.025,0.975))
+```
+compare these to the lower and upper limits we found earlier
+```{r}
+Lower
+Upper
+```
+
+CI for the median
+Suppose we want to estimate the median
+```{r}
+median(data$AGE)
+```
+
+Let's generate the 95% bootstrap CI
+```{r}
+xxx <- do(10000)*median(resample(data$AGE))
+histogram(xxx$median)
+quantile(xxx$median,probs=c(0.025,0.975))
+```
+
+
+CI for the difference between two means
+Suppose we wanted to compare the average age of smokers and non-smokers
+```{r}
+mean(AGE~SMK,data=data)
+diff(mean(AGE~SMK,data=data))
+```
+It looks like smokers are about 2.7 years older on average
+To create the 95% CI for this difference, we resample within each group, and then find the differences between the means of the groups.  And repeat the process a large number of times.  Once we have the distribution, we can find the the upper and lower confidence limits as we did before
+```{r}
+x <- data %>% filter(SMK==1) %>% select(AGE) #create smoker subgroup
+y <- data %>% filter(SMK==0) %>% select(AGE) #create non-smoker subgroup
+
+mean(y$AGE)-mean(x$AGE) #difference between the means of non-smokers and smokers
+
+xxx <- do(10000)*(mean(resample(y)$AGE)-mean(resample(x)$AGE))  #bootstrap process
+
+histogram(xxx$result)
+
+quantile(xxx$result,probs=c(0.025,0.975))  #lower and upper limits
+```
+
+
+

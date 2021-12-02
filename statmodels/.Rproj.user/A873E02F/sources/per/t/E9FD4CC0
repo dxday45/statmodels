@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1638404045220.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1927423179",
+    "id" : "E9FD4CC0",
+    "lastKnownWriteTime" : 1637572253,
+    "last_content_update" : 1637572253,
+    "path" : "~/st-thomas-classes/statmodels/project_2/project_2_day.R",
+    "project_path" : "project_2/project_2_day.R",
+    "properties" : {
+        "cursorPosition" : "19,42",
+        "scrollLine" : "12",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
